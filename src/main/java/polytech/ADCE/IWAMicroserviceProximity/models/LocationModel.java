@@ -1,14 +1,13 @@
 
 package polytech.ADCE.IWAMicroserviceProximity.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity(name="geolocation")
+@IdClass(LocationId.class)
 @Access(AccessType.FIELD)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class LocationModel {
@@ -16,9 +15,10 @@ public class LocationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
-    private long latitude;
-    private long longitude;
+    @Id
     private Date geolocation_timestamp;
+    private double latitude;
+    private double longitude;
 
     public LocationModel() {}
 
@@ -30,7 +30,7 @@ public class LocationModel {
         this.user_id = user_id;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -38,7 +38,7 @@ public class LocationModel {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
