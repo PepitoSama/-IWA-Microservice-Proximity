@@ -4,6 +4,7 @@ package polytech.ADCE.IWAMicroserviceProximity.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity(name="geolocation")
@@ -34,7 +35,7 @@ public class LocationModel {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -42,12 +43,15 @@ public class LocationModel {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     public Date getGeolocation_timestamp() {
-        return geolocation_timestamp;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(geolocation_timestamp);
+        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        return calendar.getTime();
     }
 
     public void setGeolocation_timestamp(Date geolocation_timestamp) {

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import polytech.ADCE.IWAMicroserviceProximity.models.LocationModel;
-import polytech.ADCE.IWAMicroserviceProximity.repositories.InfectedRepository;
 import polytech.ADCE.IWAMicroserviceProximity.repositories.LocationRepository;
 import polytech.ADCE.IWAMicroserviceProximity.services.DistanceCalculator;
 
@@ -17,8 +16,6 @@ public class LocationController {
     @Autowired
     private LocationRepository locationRepository ;
 
-    @Autowired
-    private InfectedRepository infectedRepository ;
 
     // Get ALL
     @GetMapping
@@ -29,17 +26,19 @@ public class LocationController {
     // POST
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestBody final LocationModel location) {
+    public boolean create(@RequestBody final LocationModel location) {
+        System.out.println(location);
         List<LocationModel> locations = locationRepository.findAll();
         boolean coroned = false;
         for(LocationModel loc : locations) {
             if(Math.abs(location.getGeolocation_timestamp().getTime() - loc.getGeolocation_timestamp().getTime()) <= 1000) {
+                System.out.println(loc);
                 double distanceMeter = DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), loc.getLatitude(), loc.getLongitude(), "K")*1000;
                 if(distanceMeter <= 2) {
                     coroned = true;
                 }
             }
         }
-        return coroned ? "Coroned" : "!Coroned";
+        return coroned ? true : false;
     }
 }
