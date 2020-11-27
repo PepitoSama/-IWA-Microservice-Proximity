@@ -5,3 +5,7 @@ server:
 spring:
   profiles:
     active: dev
+
+app:
+  distanceMax: 2
+  tempsMax: 1000

@@ -14,8 +14,7 @@ import java.util.Date;
 public class LocationModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    private String username;
     @Id
     private Date geolocation_timestamp;
     private double latitude;
@@ -23,12 +22,12 @@ public class LocationModel {
 
     public LocationModel() {}
 
-    public int getUser_id() {
-        return user_id;
+    public String getUser_id() {
+        return username;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser_id(String user_id) {
+        this.username = username;
     }
 
     public double getLatitude() {
@@ -59,6 +58,6 @@ public class LocationModel {
     }
 
     public String toString() {
-        return "User : " + this.user_id + " Lat : " + this.latitude + " Long : " + this.longitude + " timestamp : " + this.getGeolocation_timestamp();
+        return "User : " + this.username + " Lat : " + this.latitude + " Long : " + this.longitude + " timestamp : " + this.getGeolocation_timestamp();
     }
 }
