@@ -22,11 +22,11 @@ public class LocationModel {
 
     public LocationModel() {}
 
-    public String getUser_id() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

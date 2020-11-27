@@ -35,11 +35,12 @@ public class LocationController {
         List<LocationModel> locations = locationRepository.findAll();
         boolean coroned = false;
         for(LocationModel loc : locations) {
+            System.out.println(location.toString());
             long differenceTemps = Math.abs(location.getGeolocation_timestamp().getTime() - loc.getGeolocation_timestamp().getTime());
             if(differenceTemps <= tempsMax) {
                 double distanceMeter = DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), loc.getLatitude(), loc.getLongitude(), "K")*1000;
                 if(distanceMeter <= distanceMax)
-                    if(!location.getUser_id().equals(loc.getUser_id()))
+                    if(!location.getUsername().equals(loc.getUsername()))
                         coroned = true;
             }
         }
